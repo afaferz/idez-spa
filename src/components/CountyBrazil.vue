@@ -1,26 +1,8 @@
-<script setup lang="ts" export>
+<script setup lang="ts">
 import VueJsonPretty from 'vue-json-pretty'
 import 'vue-json-pretty/lib/styles.css'
 import { useCountyStore } from '../stores/county'
 import { ref } from 'vue'
-
-const store = useCountyStore()
-const stateCode = store.stateCode
-const pageSize = store.pageSize
-const pageNumber = store.pageNumber
-const updateStateCode = (stateCode: string) => store.setStateCode(stateCode)
-const updatePageSize = (pageSize: string) => store.setPageSize(Number(pageSize))
-const updatePageNumber = (pageNumber: string) => store.setPageNumber(Number(pageNumber))
-const countyResponse = store.countyResponse
-const responseMessage = ref('Waiting search...')
-const isLoading = ref(false)
-const searchCounty = async () => {
-  isLoading.value = true
-  responseMessage.value = 'Loading...'
-  await store.searchCounty()
-  isLoading.value = false
-  responseMessage.value = 'Response was:'
-}
 const STATE_LIST = [
   'DF',
   'SP',
@@ -50,6 +32,26 @@ const STATE_LIST = [
   'AP',
   'TO'
 ]
+
+// Store
+const store = useCountyStore()
+const stateCode = store.stateCode
+const pageSize = store.pageSize
+const pageNumber = store.pageNumber
+const updateStateCode = (stateCode: string) => store.setStateCode(stateCode)
+const updatePageSize = (pageSize: string) => store.setPageSize(Number(pageSize))
+const updatePageNumber = (pageNumber: string) => store.setPageNumber(Number(pageNumber))
+const countyResponse = store.countyResponse
+// Auxiliar
+const responseMessage = ref('Waiting search...')
+const isLoading = ref(false)
+const searchCounty = async () => {
+  isLoading.value = true
+  responseMessage.value = 'Loading...'
+  await store.searchCounty()
+  isLoading.value = false
+  responseMessage.value = 'Response was:'
+}
 
 window.addEventListener('keypress', (e) => {
   const { key } = e
