@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import CountyBrazilComponent from '../components/CountyBrazil.vue'
+import * as CountyBrazilComponent from '../components/CountyBrazil.vue'
 </script>
 
 <template>
   <main>
-    <CountyBrazilComponent />
+    <CountyBrazilComponent.default />
   </main>
 </template>

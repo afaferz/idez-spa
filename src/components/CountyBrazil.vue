@@ -1,8 +1,8 @@
-<script setup lang="ts">
-import { useCountyStore } from '@/stores/county'
+<script setup lang="ts" export>
 import VueJsonPretty from 'vue-json-pretty'
 import 'vue-json-pretty/lib/styles.css'
-import { reactive, ref } from 'vue'
+import { useCountyStore } from '../stores/county'
+import { ref } from 'vue'
 
 const store = useCountyStore()
 const stateCode = store.stateCode
@@ -58,6 +58,7 @@ window.addEventListener('keypress', (e) => {
     return
   }
 })
+
 </script>
 
 <template>
@@ -173,8 +174,5 @@ window.addEventListener('keypress', (e) => {
 .brasil-img__container > img {
   width: 80%;
   height: 80%;
-}
-
-.json-response {
 }
 </style>
