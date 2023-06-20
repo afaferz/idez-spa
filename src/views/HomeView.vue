@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CountyBrazilComponent from '../components/CountyBrazil.vue'
+import CountyBrazilComponent from '@/components/CountyBrazil.vue'
 </script>
 
 <template>
