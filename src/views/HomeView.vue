@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// @ts-nocheck
+// @ts-ignore
 import CountyBrazilComponent from '@/components/CountyBrazil.vue'
 </script>
 
