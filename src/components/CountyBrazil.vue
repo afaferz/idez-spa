@@ -9,8 +9,8 @@ const stateCode = store.stateCode
 const pageSize = store.pageSize
 const pageNumber = store.pageNumber
 const updateStateCode = (stateCode: string) => store.setStateCode(stateCode)
-const updatePageSize = (pageSize: number) => store.setPageSize(pageSize)
-const updatePageNumber = (PageNumber: number) => store.setPageNumber(PageNumber)
+const updatePageSize = (pageSize: string) => store.setPageSize(Number(pageSize))
+const updatePageNumber = (pageNumber: string) => store.setPageNumber(Number(pageNumber))
 const countyResponse = store.countyResponse
 const responseMessage = ref('Waiting search...')
 const isLoading = ref(false)
@@ -51,9 +51,13 @@ const STATE_LIST = [
   'TO'
 ]
 
-defineProps<{
-  msg: string
-}>()
+window.addEventListener('keypress', (e) => {
+  const { key } = e
+  if (key === 'Enter') {
+    searchCounty()
+    return
+  }
+})
 </script>
 
 <template>
@@ -88,6 +92,8 @@ defineProps<{
           label="State Code"
           variant="outlined"
           required
+          :no-data-text="'No State Code found'"
+          @keypress.enter="searchCounty"
         />
       </v-col>
       <v-col cols="12" md="4">
@@ -96,6 +102,13 @@ defineProps<{
           @input="updatePageSize($event.target.value)"
           label="Page Size"
           variant="outlined"
+          hide-details
+          single-line
+          pattern="\d*"
+          inputmode="numeric"
+          type="number"
+          min="1"
+          @keypress.enter="searchCounty"
         />
       </v-col>
       <v-col cols="12" md="4">
@@ -104,6 +117,13 @@ defineProps<{
           @input="updatePageNumber($event.target.value)"
           label="Page Number"
           variant="outlined"
+          hide-details
+          single-line
+          pattern="\d*"
+          inputmode="numeric"
+          type="number"
+          min="1"
+          @keypress.enter="searchCounty"
         />
       </v-col>
       <v-col cols="12">
@@ -114,6 +134,7 @@ defineProps<{
           class="white--text"
           @click.stop="searchCounty"
           variant="tonal"
+          @keypress.enter="searchCounty"
         >
           SEARCH COUNTY
         </v-btn>
